@@ -24,6 +24,8 @@ UserScripts can be installed via [TamperMonkey](https://www.tampermonkey.net/)/[
 
 ## Template Setup
 
+Node version >=18 is recommended. Feel free to use [nvm](https://github.com/nvm-sh/nvm) to manage node versions.
+
 Basic setup is pretty clear, just clone this package based on [template branch of this package]() with latest commit and that's it.
 
 > Always run build on local before pushing code so that the code files can get linted and prettified on local before build creation on server.
