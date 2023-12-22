@@ -1,0 +1,59 @@
+{
+  "name": "@shivams136/userscript-base",
+  "version": "0.1.0",
+  "description": "Package for containing UserScripts and UserScript Libraries created by ShivamS136",
+  "author": {
+    "name": "Shivam Sharma"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:ShivamS136/UserscriptBase.git"
+  },
+  "type": "module",
+  "exports": {
+    "import": [
+      "./build/lib/index.js"
+    ]
+  },
+  "types": "./build/lib/@types",
+  "scripts": {
+    "dev": "vite dev -c",
+    "clean": "npm run clean:dist && npm run clean:build",
+    "clean:dist": "rm -rf dist",
+    "clean:build": "rm -rf build/userscripts && rm -rf build/lib",
+    "prebuild": "npm run lint:fix",
+    "build": "npm run build:vite-monkey && npm run build:vanilla && npm run build:lib",
+    "build:vite-monkey": "for jsconf in src/**/vite.config.{js,ts}; do [ -e \"$jsconf\" ] && vite build -c $jsconf && npm run sync-dist-to-build; done",
+    "build:vanilla": "npm run clean:dist && npm run build:vanilla-js && npm run build:vanilla-ts && npm run sync-dist-to-build",
+    "build:vanilla-js": "mkdir -p dist/userscripts/vanilla/ && rsync -r src/vanilla/*.user.js dist/userscripts/vanilla/",
+    "build:vanilla-ts": "tsc --project src/vanilla/tsconfig.json",
+    "build:lib": "npm run clean:dist && tsc --project lib/tsconfig.json && npm run sync-dist-to-build",
+    "sync-dist-to-build": "mkdir -p build && rsync -r dist/ build",
+    "prettier:check": "prettier . --check",
+    "prettier:write": "prettier . --write",
+    "lint": "npm run prettier:check && eslint --ignore-path .gitignore --ext .js,.ts .",
+    "lint:fix": "npm run prettier:write && npm run lint -- --fix",
+    "release": "npm run clean && npm run lint && npm run build",
+    "prepare": "npm run lint:fix",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.2",
+    "@types/tampermonkey": "^5.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "@vitest/coverage-v8": "^1.0.4",
+    "eslint": "^8.50.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.28.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2",
+    "unplugin-auto-import": "^0.17.2",
+    "vite": "^5.0.10",
+    "vite-plugin-dts": "^3.5.3",
+    "vite-plugin-monkey": "^3.5.0",
+    "vitest": "^1.0.4"
+  }
+}

@@ -1,0 +1,12 @@
+# modules
+node_modules
+
+# build dir
+build
+dist
+
+coverage
+.DS_Store
+
+# Intellij Project
+*.iml

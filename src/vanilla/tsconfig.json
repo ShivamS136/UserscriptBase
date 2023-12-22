@@ -1,0 +1,10 @@
+{
+  "extends": "../../base.tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../../dist/userscripts/vanilla/",
+    "noEmit": false,
+    "allowImportingTsExtensions": false
+  },
+  "include": ["./*.user.ts"]
+}
