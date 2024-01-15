@@ -22,7 +22,7 @@
     "clean:dist": "rm -rf dist",
     "clean:build": "rm -rf build/userscripts && rm -rf build/lib",
     "prebuild": "npm run lint:fix",
-    "build": "npm run build:vite-monkey && npm run build:vanilla && npm run build:lib",
+    "build": "npm run build:vite-monkey && npm run build:vanilla && npm run build:lib && npm run clean:dist",
     "build:vite-monkey": "for jsconf in src/**/vite.config.{js,ts}; do [ -e \"$jsconf\" ] && vite build -c $jsconf && npm run sync-dist-to-build; done",
     "build:vanilla": "npm run clean:dist && npm run build:vanilla-js && npm run build:vanilla-ts && npm run sync-dist-to-build",
     "build:vanilla-js": "mkdir -p dist/userscripts/vanilla/ && rsync -r src/vanilla/*.user.js dist/userscripts/vanilla/",
@@ -38,6 +38,7 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "@types/css-modules": "^1.0.5",
     "@types/node": "^20.6.2",
     "@types/tampermonkey": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
@@ -49,6 +50,7 @@
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.28.1",
     "prettier": "^3.0.3",
+    "sass": "^1.69.7",
     "typescript": "^5.2.2",
     "unplugin-auto-import": "^0.17.2",
     "vite": "^5.0.10",

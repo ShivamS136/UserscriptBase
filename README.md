@@ -15,6 +15,7 @@ This package is full of the features like:
 - TS is not forced and `.js` files are also supported in the package
 - [ESLint](https://eslint.org/) Support for linting check and auto fix purpose
 - [Prettier](https://prettier.io/) Support to automatically prettify the code files
+- [SASS/SCSS](https://sass-lang.com/) and [CSS Modules](https://github.com/css-modules/css-modules) support out of the box by default.
 - Fully configurable build system
 - ...and many more
 
@@ -186,6 +187,23 @@ if (import.meta.vitest) {
     expect(add(1, 2, 3)).toBe(6);
   });
 }
+```
+
+## Tips
+
+### CSS
+
+To use CSS, no need to use `GM_addStyle`, just import the `.css/.scss/.sass` file in the JS file like below, and you are good to go.
+The package supports [SASS/SCSS](https://sass-lang.com/) by default.
+
+```js
+import 'style/main.scss';
+```
+
+OR
+
+```js
+import styles from 'style/main.module.scss';
 ```
 
 ## Troubleshoot
